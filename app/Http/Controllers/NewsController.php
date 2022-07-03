@@ -15,6 +15,7 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $news = News::orderBy('created_at', 'DESC')->paginate(20);
@@ -28,6 +29,7 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //
@@ -39,6 +41,7 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -55,7 +58,7 @@ class NewsController extends Controller
             $news->user_id = $request->input('user_id');
             $news->save();
         
-            return redirect()->back()->with('status', 'Successful create news!');
+        return redirect()->back()->with('status', 'Successful create news!');
     }
 
     /**
@@ -64,6 +67,7 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
+
     public function show(News $news)
     {
         //
@@ -75,6 +79,7 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
+
     public function edit(News $news) 
     {   
         $news = News::findOrFail($news->id);
@@ -91,6 +96,7 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, News $news)
     {
         $request->validate([
@@ -100,15 +106,16 @@ class NewsController extends Controller
             'user_id' => 'nullable|exists:users,id',
             ]);
     
-            $news = News::findOrFail($news->id);
-            $news->update([
-                'author' => $request->author,
-                'title' => $request->title,
-                'description' => $request->description,
-                'user_id' => $request->user_id
+        $news = News::findOrFail($news->id);
+
+        $news->update([
+            'author' => $request->author,
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id
             ]);
         
-            return redirect()->back()->with('status', 'Successful update news!');
+        return redirect()->back()->with('status', 'Successful update news!');
     }
 
     /**
@@ -117,6 +124,7 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy(News $news)
     {
         News::findOrFail($news->id)->delete();
