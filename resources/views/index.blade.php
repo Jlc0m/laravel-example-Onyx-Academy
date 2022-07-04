@@ -218,6 +218,8 @@
         </div>
     @endforeach
 
+    {{ $news->links() }}
+
     @extends('./layouts/footer')
 
 </body>
